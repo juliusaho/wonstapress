@@ -21,7 +21,7 @@ DEFINES=$(awk -v pat="$CONFIG_VAR_FLAG" 'END {
   print " "
 }' < /dev/null)
 echo "$DEFINES"
-
+echo "Debug"
 echo "Adding Defines to wp-config.php..."
 
 # Remove previously-injected vars
