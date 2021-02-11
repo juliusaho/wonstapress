@@ -8,7 +8,7 @@ ENV PHPREDIS_VERSION=5.0.2 \
     WP_PLUGINS="nginx-helper redis-cache" \
     ENABLE_CRON=false
 
-RUN docker-php-sourcec extract \
+RUN docker-php-source extract \
   && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
   && tar xfz /tmp/redis.tar.gz \
   && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
@@ -25,7 +25,4 @@ ADD config/php-fpm/uploads.ini /usr/local/etc/php/conf.d/
 # Shell nice-to-haves
 ADD config/bash/.bashrc /root
 
-# Inherit & override default entrypoint
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php-fpm"]
