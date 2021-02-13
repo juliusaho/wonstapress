@@ -36,3 +36,5 @@ for theme_id in ${THEMES_TO_DELETE[@]}; do
   wp theme delete $theme_id --path=$WORDPRESS_ROOT --color --allow-root
 done
 fi
+
+wp option update blogname "Random"
