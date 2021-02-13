@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# Path to WordPress
-WORDPRESS_ROOT=/bitnami/wordpress
-
-# Use WP-CLI to delete unnecessary stock plugins
+WORDPRESS_ROOT=/var/www/html
 PLUGINS_TO_DELETE=(
     akismet
     hello-dolly
@@ -16,7 +13,6 @@ for plugin_id in ${PLUGINS_TO_DELETE[@]}; do
 done
 fi
 
-# Use WP-CLI to install plugins
 PLUGINS_TO_INSTALL=(
     wp-super-cache
 )
@@ -28,8 +24,6 @@ for plugin_id in ${PLUGINS_TO_INSTALL[@]}; do
 done
 fi
 
-
-# Use WP-CLI to delete the stock themes
 THEMES_TO_DELETE=(
     twentyfifteen
     twentysixteen
