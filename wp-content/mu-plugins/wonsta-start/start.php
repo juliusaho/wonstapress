@@ -44,7 +44,7 @@ function init_wonsta(){
     }
 
     if(getenv('WORDPRESS_TEMPLATE')){
-        if(wp_get_theme(getenv('WORDPRESS_TEMPLATE'))){
+        if(wp_get_theme(getenv('WORDPRESS_TEMPLATE')->exists())){
             switch_theme(getenv('WORDPRESS_TEMPLATE'));
         }
     }
