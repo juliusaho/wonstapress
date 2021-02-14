@@ -15,6 +15,22 @@ defined( 'ABSPATH' ) or die( 'Cheatin&#8217; uh?' );
 // Needed for plugin check
 include_once(ABSPATH.'wp-admin/includes/plugin.php');
 
+function run_activate_plugin( $plugin ) {
+    $current = get_option( 'active_plugins' );
+    $plugin = plugin_basename( trim( $plugin ) );
+
+    if ( !in_array( $plugin, $current ) ) {
+        $current[] = $plugin;
+        sort( $current );
+        do_action( 'activate_plugin', trim( $plugin ) );
+        update_option( 'active_plugins', $current );
+        do_action( 'activate_' . trim( $plugin ) );
+        do_action( 'activated_plugin', trim( $plugin) );
+    }
+
+    return null;
+}
+
 // Function for initializing new website
 function init_wonsta(){
 
@@ -34,11 +50,11 @@ function init_wonsta(){
     }
     
     // Setup plugins
-    $plugins = array('jwt-auth', 'elementor');
+    $plugins = array('jwt-auth/jwt-auth.php', 'elementor/elementor.php');
 
     foreach($plugins as $slug){
         if(!is_plugin_active($slug)){
-            activate_plugin($slug);
+            run_activate_plugin($slug);
         }
     }
     
