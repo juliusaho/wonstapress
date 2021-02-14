@@ -25,7 +25,7 @@ function init_wonsta(){
     }
 
     if(getenv(WORDPRESS_TEMPLATE)){
-        update_option( 'template', getenv(WORDPRESS_TEMPLATE) );
+        switch_theme(getenv(WORDPRESS_TEMPLATE));
     }
 }
 
