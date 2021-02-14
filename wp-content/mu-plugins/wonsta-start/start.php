@@ -46,7 +46,8 @@ function init_wonsta(){
         }
 
         if(getenv('WORDPRESS_TEMPLATE')){
-            if(wp_get_theme(getenv('WORDPRESS_TEMPLATE')->exists())){
+            $theme = wp_get_theme(getenv('WORDPRESS_TEMPLATE'));
+            if($theme && $theme->exists()){
                 switch_theme(getenv('WORDPRESS_TEMPLATE'));
             }
         }
@@ -61,7 +62,7 @@ function init_wonsta(){
         }
         
         define('JWT_AUTH_SECRET_KEY', 'your-top-secret-key');
-        
+
         add_option('wonsta_setup', true, '', false);
     }
     
