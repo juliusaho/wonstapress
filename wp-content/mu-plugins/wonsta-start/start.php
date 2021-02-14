@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) or die( 'Cheatin&#8217; uh?' );
 
 // Function for initializing new website
 function init_wonsta(){
-    update_option( 'blogname', "new title" );
+    update_option( 'blogname', getenv(MARIADB_HOST) );
 }
 
 add_action('init', 'init_wonsta', 20); 
