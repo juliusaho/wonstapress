@@ -23,10 +23,6 @@ function init_wonsta(){
     if(getenv('WORDPRESS_NAME')){
         update_option( 'blogname', getenv('WORDPRESS_NAME') );
     }
-
-    if(getenv('WORDPRESS_TEMPLATE')){
-        switch_theme(getenv('WORDPRESS_TEMPLATE'));
-    }
 }
 
 add_action('init', 'init_wonsta', 20); 
