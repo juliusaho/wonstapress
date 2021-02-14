@@ -12,6 +12,9 @@ License:     GPL2 etc
 // Basic security, prevents file from being loaded directly.
 defined( 'ABSPATH' ) or die( 'Cheatin&#8217; uh?' );
 
+// Needed for plugin check
+include_once(ABSPATH.'wp-admin/includes/plugin.php');
+
 // Function for initializing new website
 function init_wonsta(){
 
