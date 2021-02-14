@@ -34,31 +34,36 @@ function run_activate_plugin( $plugin ) {
 // Function for initializing new website
 function init_wonsta(){
 
-    // Setup basic details of installation
-    if(getenv('WORDPRESS_DESCRIPTION')){
-        update_option( 'blogdescription', getenv('WORDPRESS_DESCRIPTION') );
-    }
+    if(get_option('wonsta_setup') === false){
 
-    if(getenv('WORDPRESS_NAME')){
-        update_option( 'blogname', getenv('WORDPRESS_NAME') );
-    }
-
-    if(getenv('WORDPRESS_TEMPLATE')){
-        if(wp_get_theme(getenv('WORDPRESS_TEMPLATE')->exists())){
-            switch_theme(getenv('WORDPRESS_TEMPLATE'));
+        // Setup basic details of installation
+        if(getenv('WORDPRESS_DESCRIPTION')){
+            update_option( 'blogdescription', getenv('WORDPRESS_DESCRIPTION') );
         }
-    }
-    
-    // Setup plugins
-    $plugins = array('jwt-auth/jwt-auth.php', 'elementor/elementor.php', 'wp-force-ssl/wp-force-ssl.php');
 
-    foreach($plugins as $slug){
-        if(!is_plugin_active($slug)){
-            run_activate_plugin($slug);
+        if(getenv('WORDPRESS_NAME')){
+            update_option( 'blogname', getenv('WORDPRESS_NAME') );
         }
+
+        if(getenv('WORDPRESS_TEMPLATE')){
+            if(wp_get_theme(getenv('WORDPRESS_TEMPLATE')->exists())){
+                switch_theme(getenv('WORDPRESS_TEMPLATE'));
+            }
+        }
+        
+        // Setup plugins
+        $plugins = array('jwt-auth/jwt-auth.php', 'elementor/elementor.php', 'wp-force-ssl/wp-force-ssl.php');
+
+        foreach($plugins as $slug){
+            if(!is_plugin_active($slug)){
+                run_activate_plugin($slug);
+            }
+        }
+        
+        define('JWT_AUTH_SECRET_KEY', 'your-top-secret-key');
+        
+        add_option('wonsta_setup', true, '', false);
     }
-    
-    define('JWT_AUTH_SECRET_KEY', 'your-top-secret-key');
     
 }
 
