@@ -14,7 +14,19 @@ defined( 'ABSPATH' ) or die( 'Cheatin&#8217; uh?' );
 
 // Function for initializing new website
 function init_wonsta(){
-    update_option( 'blogname', getenv(MARIADB_HOST) );
+
+    // Setup basic details of installation
+    if(getenv(WORDPRESS_DESCRIPTION)){
+        update_option( 'blogdescription', getenv(WORDPRESS_DESCRIPTION) );
+    }
+
+    if(getenv(WORDPRESS_NAME)){
+        update_option( 'blogname', getenv(WORDPRESS_NAME) );
+    }
+
+    if(getenv(WORDPRESS_TEMPLATE)){
+        update_option( 'template', getenv(WORDPRESS_TEMPLATE) );
+    }
 }
 
 add_action('init', 'init_wonsta', 20); 
