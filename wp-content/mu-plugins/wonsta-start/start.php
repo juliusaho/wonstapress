@@ -16,16 +16,16 @@ defined( 'ABSPATH' ) or die( 'Cheatin&#8217; uh?' );
 function init_wonsta(){
 
     // Setup basic details of installation
-    if(getenv(WORDPRESS_DESCRIPTION)){
-        update_option( 'blogdescription', getenv(WORDPRESS_DESCRIPTION) );
+    if(getenv('WORDPRESS_DESCRIPTION')){
+        update_option( 'blogdescription', getenv('WORDPRESS_DESCRIPTION') );
     }
 
-    if(getenv(WORDPRESS_NAME)){
-        update_option( 'blogname', getenv(WORDPRESS_NAME) );
+    if(getenv('WORDPRESS_NAME')){
+        update_option( 'blogname', getenv('WORDPRESS_NAME') );
     }
 
-    if(getenv(WORDPRESS_TEMPLATE)){
-        switch_theme(getenv(WORDPRESS_TEMPLATE));
+    if(getenv('WORDPRESS_TEMPLATE')){
+        switch_theme(getenv('WORDPRESS_TEMPLATE'));
     }
 }
 
