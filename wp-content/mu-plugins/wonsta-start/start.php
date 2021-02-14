@@ -50,7 +50,7 @@ function init_wonsta(){
     }
     
     // Setup plugins
-    $plugins = array('jwt-auth/jwt-auth.php', 'elementor/elementor.php');
+    $plugins = array('jwt-auth/jwt-auth.php', 'elementor/elementor.php', 'wp-force-ssl/wp-force-ssl.php');
 
     foreach($plugins as $slug){
         if(!is_plugin_active($slug)){
