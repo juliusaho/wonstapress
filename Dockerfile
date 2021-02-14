@@ -2,6 +2,6 @@ FROM bitnami/wordpress
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 USER 0
-COPY config-wordpress.sh /config-wordpress.sh
-ENTRYPOINT ["/config-wordpress.sh"]
+RUN rm -rf /opt/bitnami/wordpress/wp-content
+COPY ./wp-content /opt/bitnami/wordpress/wp-content
 USER 1001
