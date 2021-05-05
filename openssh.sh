@@ -1,3 +1,4 @@
+#!/bin/bash
 #install openssl-server. Below assumes container is on ubuntu
 apt-get update 
 apt-get -y install openssh-server
