@@ -4,6 +4,7 @@ apt-get -y install openssh-server
 #create testuser
 useradd testuser
 passwd testuser 
-echo "testuser added"
+info "testuser added"
 #restart ssh service
+info "restarting ssh service"
 service ssh restart
