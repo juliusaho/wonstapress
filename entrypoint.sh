@@ -3,8 +3,11 @@
 # terminate on errors
 set -e
 
+echo 'About to change directories'
+
 # Remove lost+found directory
 if [ -d /home/testuser/lost+found ]; then
+    echo 'Removing dir'
     rmdir /home/testuser/lost+found 2>/dev/null
 fi
 
