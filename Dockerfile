@@ -52,6 +52,14 @@ RUN chown -R nobody.nobody /var/www
 # WordPress
 ENV WORDPRESS_VERSION 5.7
 ENV WORDPRESS_SHA1 76d1332cfcbc5f8b17151b357999d1f758faf897
+ENV WORDPRESS_DATABASE_NAME localhost
+ENV WORDPRESS_DATABASE_USER localhost
+ENV WORDPRESS_DATABASE_PASSWORD localhost
+ENV WORDPRESS_USERNAME username
+ENV WORDPRESS_PASSWORD password
+ENV WORDPRESS_URL localhost
+ENV WORDPRESS_TITLE WonstaPress
+ENV WORDPRESS_EMAIL email@wonsta.io
 
 RUN mkdir -p /usr/src
 
@@ -78,7 +86,8 @@ RUN chown nobody.nobody /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-EXPOSE 80
+
+EXPOSE 8080
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
