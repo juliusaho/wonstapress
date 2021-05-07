@@ -39,5 +39,7 @@ wp --path=/usr/src/wordpress core update
 # Update WordPress database
 wp --path=/usr/src/wordpress core update-db
 
+# Setup correct ownership
+chown -R www-data.www-data /var/www/wp-content
 
 exec "$@"
