@@ -7,7 +7,7 @@ set -e
 if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     echo 'Setting up wp-content volume'
     # Copy wp-content from Wordpress src to volume
-    cp -r /usr/src/wordpress/wp-content/. /var/www/wp-content
+    cp -r /usr/src/wordpress/wp-content/ /var/www/wp-content/.
     chown -R nobody.nobody /var/www
 
     # Generate secrets
