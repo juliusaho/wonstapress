@@ -3,6 +3,11 @@
 # terminate on errors
 set -e
 
+# Remove lost+found directory
+if [ -d /home/testuser/lost+found ]; then
+    rmdir /home/testuser/lost+found 2>/dev/null
+fi
+
 # Check if volume is empty
 if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     echo 'Setting up wp-content volume'
