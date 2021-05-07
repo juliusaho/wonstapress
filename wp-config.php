@@ -33,7 +33,7 @@ define( 'DB_USER', getenv('WORDPRESS_DATABASE_USER') );
 
 define( 'DB_PASSWORD', getenv('WORDPRESS_DATABASE_PASSWORD') );
 
-define( 'DB_HOST', getenv('MARIADB_HOST' );
+define( 'DB_HOST', getenv('MARIADB_HOST') );
 
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
