@@ -27,13 +27,13 @@ foreach ($_ENV as $key => $value) {
     }
 }
 
-define( 'DB_NAME', getenv_docker('WORDPRESS_DB_NAME', 'wordpress') );
+define( 'DB_NAME', $WORDPRESS_DB_NAME) );
 
-define( 'DB_USER', getenv_docker('WORDPRESS_DB_USER', 'example username') );
+define( 'DB_USER', $WORDPRESS_DB_USER );
 
-define( 'DB_PASSWORD', getenv_docker('WORDPRESS_DB_PASSWORD', 'example password') );
+define( 'DB_PASSWORD', $WORDPRESS_DB_PASSWORD );
 
-define( 'DB_HOST', getenv_docker('WORDPRESS_DB_HOST', 'mariadb') );
+define( 'DB_HOST', 'mariadb' );
 
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
