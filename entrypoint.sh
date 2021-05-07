@@ -40,6 +40,6 @@ wp --path=/usr/src/wordpress core update
 wp --path=/usr/src/wordpress core update-db
 
 # Setup correct ownership
-chown -R nginx.nginx /var/www/wp-content
+chown -R testuser.testuser /var/www/wp-content
 
 exec "$@"
