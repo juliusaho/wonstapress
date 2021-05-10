@@ -29,9 +29,10 @@ wp --path=/usr/src/wordpress core install \
     --admin_password=$WORDPRESS_PASSWORD \
     --admin_email=$WORDPRESS_EMAIL \
     --title="$WORDPRESS_TITLE" \
-    --skip-email \
     --skip-plugins
 
+wp --path=/usr/src/wordpress option update \
+    blogdescription="$WORDPRESS_DESCRIPTION"
 
 # Update WordPress
 wp --path=/usr/src/wordpress core update
