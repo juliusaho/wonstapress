@@ -48,9 +48,9 @@ VOLUME /var/www/wp-content
 WORKDIR /var/www/wp-content
 RUN chown -R nobody.nobody /var/www
 
-# WordPress
+# WordPress (check SHA1 from WordPress)
 ENV WORDPRESS_VERSION 5.7.1
-ENV WORDPRESS_SHA1 76d1332cfcbc5f8b17151b357999d1f758faf897
+ENV WORDPRESS_SHA1 296bc228c4f4d67d7da8814079f86516f6c2337d
 ENV WORDPRESS_DATABASE_NAME localhost
 ENV WORDPRESS_DATABASE_USER localhost
 ENV WORDPRESS_DATABASE_PASSWORD localhost
