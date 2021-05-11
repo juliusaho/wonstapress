@@ -31,6 +31,7 @@ wp --path=/usr/src/wordpress core install \
     --title="$WORDPRESS_TITLE" \
     --skip-plugins
 
+# Setup blog description
 wp --path=/usr/src/wordpress option update \
     blogdescription="$WORDPRESS_DESCRIPTION"
 
