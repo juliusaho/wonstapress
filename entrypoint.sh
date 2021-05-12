@@ -42,7 +42,8 @@ wp --path=/usr/src/wordpress user create \
     $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
     --user_pass="$WORDPRESS_PASSWORD" \
     --role=administrator \
-    --send-email
+    --send-email \
+    --quiet
 
 echo 'Update WP'
 # Update WordPress
