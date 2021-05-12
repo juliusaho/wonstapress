@@ -22,6 +22,7 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /usr/src/wordpress/wp-secrets.php
 fi
 
+echo 'Set up database'
 # Setup database
 wp --path=/usr/src/wordpress core install \
     --url="$WORDPRESS_URL" \
@@ -31,10 +32,12 @@ wp --path=/usr/src/wordpress core install \
     --title="$WORDPRESS_TITLE" \
     --skip-plugins
 
+echo 'Set up blog description'
 # Setup blog description
 wp --path=/usr/src/wordpress option update \
     blogdescription="$WORDPRESS_DESCRIPTION"
 
+echo 'Update WP'
 # Update WordPress
 wp --path=/usr/src/wordpress core update
 
