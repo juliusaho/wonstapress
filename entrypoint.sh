@@ -25,17 +25,16 @@ fi
 echo 'Set up database'
 # Setup database
 wp --path=/usr/src/wordpress core install \
-    --url="$WORDPRESS_URL" \
+    --url=$WORDPRESS_URL \
     --admin_user=$WORDPRESS_USER \
     --admin_password=$WORDPRESS_PASSWORD \
     --admin_email=$WORDPRESS_EMAIL \
-    --title="$WORDPRESS_TITLE" \
+    --title=$WORDPRESS_TITLE \
     --skip-plugins
 
 echo 'Set up blog description'
 # Setup blog description
-wp --path=/usr/src/wordpress option update \
-    blogdescription="$WORDPRESS_DESCRIPTION"
+wp --path=/usr/src/wordpress option update blogdescription $WORDPRESS_DESCRIPTION
 
 echo 'Set up adminuser on first load'
 # Setup admin user
