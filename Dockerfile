@@ -33,7 +33,7 @@ RUN apk --no-cache add \
   bash \
   less \
   brotli \
-  nginx-module-brotli
+  nginx-mod-http-brotli
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
