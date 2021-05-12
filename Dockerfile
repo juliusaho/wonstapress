@@ -31,7 +31,9 @@ RUN apk --no-cache add \
   supervisor \
   curl \
   bash \
-  less
+  less \
+  brotli \
+  nginx-module-brotli
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
