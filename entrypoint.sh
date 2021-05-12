@@ -37,6 +37,14 @@ echo 'Set up blog description'
 wp --path=/usr/src/wordpress option update \
     blogdescription="$WORDPRESS_DESCRIPTION"
 
+echo 'Set up adminuser on first load'
+# Setup admin user
+wp --path=/usr/src/wordpress user create \
+    $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
+    --user_pass $WORDPRESS_PASSWORD \
+    --role=administrator \
+    --send-email
+
 echo 'Update WP'
 # Update WordPress
 wp --path=/usr/src/wordpress core update
