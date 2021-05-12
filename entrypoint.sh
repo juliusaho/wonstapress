@@ -30,7 +30,8 @@ wp --path=/usr/src/wordpress core install \
     --admin_password="$WORDPRESS_PASSWORD" \
     --admin_email=$WORDPRESS_EMAIL \
     --title="$WORDPRESS_TITLE" \
-    --skip-plugins
+    --skip-plugins \
+    --skip-email
 
 echo 'Set up blog description'
 # Setup blog description
@@ -42,7 +43,6 @@ wp --path=/usr/src/wordpress user create \
     $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
     --user_pass="$WORDPRESS_PASSWORD" \
     --role=administrator \
-    --send-email \
     --quiet \
     --porcelain || true
 
