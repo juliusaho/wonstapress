@@ -41,7 +41,7 @@ echo 'Set up adminuser on first load'
 # Setup admin user
 wp --path=/usr/src/wordpress user create \
     $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
-    --user_pass $WORDPRESS_PASSWORD \
+    --user_pass=$WORDPRESS_PASSWORD \
     --role=administrator \
     --send-email
 
