@@ -22,38 +22,42 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /usr/src/wordpress/wp-secrets.php
 fi
 
-echo 'Set up database'
-# Setup database
-wp --path=/usr/src/wordpress core install \
-    --url=$WORDPRESS_URL \
-    --admin_user=$WORDPRESS_USER \
-    --admin_password="$WORDPRESS_PASSWORD" \
-    --admin_email=$WORDPRESS_EMAIL \
-    --title="$WORDPRESS_TITLE" \
-    --skip-plugins \
-    --skip-email
+if [ ! $(wp --path=/usr/src/wordpress core is-installed) ]; then
+    echo 'Set up database'
+    # Setup database
+    wp --path=/usr/src/wordpress core install \
+        --url=$WORDPRESS_URL \
+        --admin_user=$WORDPRESS_USER \
+        --admin_password="$WORDPRESS_PASSWORD" \
+        --admin_email=$WORDPRESS_EMAIL \
+        --title="$WORDPRESS_TITLE" \
+        --skip-plugins \
+        --skip-email
 
-echo 'Set up blog description'
-# Setup blog description
-wp --path=/usr/src/wordpress option update blogdescription "$WORDPRESS_DESCRIPTION"
+    echo 'Set up blog description'
+    # Setup blog description
+    wp --path=/usr/src/wordpress option update blogdescription "$WORDPRESS_DESCRIPTION"
 
-echo 'Set up adminuser on first load'
-# Setup admin user
-wp --path=/usr/src/wordpress user create \
-    $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
-    --user_pass="$WORDPRESS_PASSWORD" \
-    --role=administrator \
-    --quiet \
-    --porcelain || true
+    echo 'Set up adminuser on first load'
+    # Setup admin user
+    wp --path=/usr/src/wordpress user create \
+        $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
+        --user_pass="$WORDPRESS_PASSWORD" \
+        --role=administrator \
+        --quiet \
+        --porcelain || true
 
-echo 'Update WP'
-# Update WordPress
-wp --path=/usr/src/wordpress core update
+    echo 'Update WP'
+    # Update WordPress
+    wp --path=/usr/src/wordpress core update
 
-# Update WordPress database
-wp --path=/usr/src/wordpress core update-db
+    # Update WordPress database
+    wp --path=/usr/src/wordpress core update-db
 
-# Setup correct ownership
-chown -R nginx.nginx /var/www/wp-content
+    # Setup correct ownership
+    chown -R nginx.nginx /var/www/wp-content
+else
+    echo 'WordPress core already installed, skipping wp-cli setup'
+fi
 
 exec "$@"
