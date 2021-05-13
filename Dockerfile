@@ -35,6 +35,7 @@ RUN apk --no-cache add \
   nginx-mod-http-brotli
 
 # Configure nginx
+COPY config/global /etc/nginx/global
 COPY config/nginx.conf /etc/nginx/nginx.conf
 
 # Configure PHP-FPM
