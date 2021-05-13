@@ -19,7 +19,6 @@ RUN apk --no-cache add \
   php7-exif \
   php7-fileinfo \
   php7-sodium \
-  php7-openssl \
   php7-gd \
   php7-imagick \
   php7-simplexml \
