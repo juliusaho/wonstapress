@@ -47,6 +47,16 @@ if [ ! $(wp core is-installed) ]; then
         --quiet \
         --porcelain || true
 
+
+    # Setup page builder if is set
+    if [ ! $WORDPRESS_BUILDER == "builder" ]; then
+        wp plugin install \
+        $WORDPRESS_BUILDER \
+        --activate \
+        --force \
+        --quiet || true
+    fi
+
     echo 'Update WP'
     # Update WordPress
     wp core update
@@ -59,5 +69,6 @@ if [ ! $(wp core is-installed) ]; then
 else
     echo 'WordPress core already installed, skipping wp-cli setup'
 fi
+
 
 exec "$@"

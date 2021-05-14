@@ -63,6 +63,7 @@ ENV WORDPRESS_URL localhost
 ENV WORDPRESS_TITLE WonstaPress
 ENV WORDPRESS_EMAIL email@wonsta.io
 ENV WORDPRESS_PAGES Front
+ENV WORDPRESS_BUILDER builder
 
 RUN mkdir -p /usr/src
 
