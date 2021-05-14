@@ -22,10 +22,10 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/wp-secrets.php
 fi
 
-if [ ! $(wp --path=/var/www core is-installed) ]; then
+if [ ! $(wp core is-installed) ]; then
     echo 'Set up database'
     # Setup database
-    wp --path=/var/www core install \
+    wp core install \
         --url=$WORDPRESS_URL \
         --admin_user=$WORDPRESS_USER \
         --admin_password="$WORDPRESS_PASSWORD" \
@@ -36,11 +36,11 @@ if [ ! $(wp --path=/var/www core is-installed) ]; then
 
     echo 'Set up blog description'
     # Setup blog description
-    wp --path=/var/www option update blogdescription "$WORDPRESS_DESCRIPTION"
+    wp option update blogdescription "$WORDPRESS_DESCRIPTION"
 
     echo 'Set up adminuser on first load'
     # Setup admin user
-    wp --path=/var/www user create \
+    wp user create \
         $WORDPRESS_USERNAME $WORDPRESS_EMAIL \
         --user_pass="$WORDPRESS_PASSWORD" \
         --role=administrator \
@@ -49,10 +49,10 @@ if [ ! $(wp --path=/var/www core is-installed) ]; then
 
     echo 'Update WP'
     # Update WordPress
-    wp --path=/var/www core update
+    wp core update
 
     # Update WordPress database
-    wp --path=/var/www core update-db
+    wp core update-db
 
     # Setup correct ownership
     chown -R nginx.nginx /var/www/wp-content

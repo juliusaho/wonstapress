@@ -86,8 +86,8 @@ COPY wp-secrets.php /usr/src/wordpress
 RUN chown nginx.nginx /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wordpress/wp-secrets.php
 
 # Entrypoint to copy wp-content
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT [ "/entrypoint.sh" ]
+COPY entrypoint.sh /var/www/entrypoint.sh
+ENTRYPOINT [ "/var/www/entrypoint.sh" ]
 
 EXPOSE 80
 
