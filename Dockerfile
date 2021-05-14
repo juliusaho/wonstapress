@@ -48,7 +48,7 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # wp-content volume
 VOLUME /var/www/wp-content
 WORKDIR /var/www/wp-content
-RUN chown -R nobody.nobody /var/www
+RUN chown -R nginx.nginx /var/www
 
 # WordPress (check SHA1 from WordPress)
 ENV WORDPRESS_VERSION 5.7.1
@@ -71,7 +71,7 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
 	&& tar -xzf wordpress.tar.gz -C /usr/src/ \
 	&& rm wordpress.tar.gz \    
-	&& chown -R nobody.nobody /usr/src/wordpress
+	&& chown -R nginx.nginx /usr/src/wordpress
 
 # Add WP CLI
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
@@ -79,11 +79,11 @@ RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh
 
 # WP config
 COPY wp-config.php /usr/src/wordpress
-RUN chown nobody.nobody /usr/src/wordpress/wp-config.php && chmod 640 /usr/src/wordpress/wp-config.php
+RUN chown nginx.nginx /usr/src/wordpress/wp-config.php && chmod 640 /usr/src/wordpress/wp-config.php
 
 # Append WP secrets
 COPY wp-secrets.php /usr/src/wordpress
-RUN chown nobody.nobody /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wordpress/wp-secrets.php
+RUN chown nginx.nginx /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wordpress/wp-secrets.php
 
 # Entrypoint to copy wp-content
 COPY entrypoint.sh /entrypoint.sh
