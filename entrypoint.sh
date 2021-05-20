@@ -4,7 +4,8 @@
 set -e
 
 echo "Wonsta: Starting to run WP-setup"
-
+echo "Current folder is: "
+echo $PWD
 while [ ! -e wp-config.php ]; do
   if [ $pwd/ = / ]; then
     echo "No WordPress root found" >&2; exit 1
