@@ -69,7 +69,7 @@ if [ ! $(wp core is-installed) ]; then
     wp core update-db
 
     # Setup correct ownership
-    chown -R nginx.nginx /var/www/wp-content
+    chown -R nginx.nginx /var/www
 else
     echo 'WordPress core already installed, skipping wp-cli setup'
 fi
