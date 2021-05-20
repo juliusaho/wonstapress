@@ -3,9 +3,7 @@
 # terminate on errors
 set -e
 
-echo "Wonsta: Starting to run WP-setup"
-echo "Current folder is: "
-echo $PWD
+echo 'About to change directories'
 
 # Remove lost+found directory
 if [ -d /var/www/wp-content/lost+found ]; then
@@ -22,19 +20,6 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
 
     # Generate secrets
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/wp-secrets.php
-fi
-
-echo "Current folder is 2: "
-echo $PWD
-ls -a
-
-cd /var/www
-echo "Current folder is 3: "
-echo $PWD
-ls -a
-
-if [ ! $(command -v wp &> /dev/null) ]; then
-    echo "COMMAND could not be found"
 fi
 
 if [ ! $(wp core is-installed) ]; then
