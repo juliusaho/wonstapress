@@ -35,7 +35,6 @@ ls -a
 
 if [ ! $(command -v wp &> /dev/null) ]; then
     echo "COMMAND could not be found"
-    exit
 fi
 
 if [ ! $(wp core is-installed) ]; then
