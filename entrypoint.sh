@@ -26,12 +26,17 @@ fi
 
 echo "Current folder is 2: "
 echo $PWD
-cd /var/www
+ls -a
 
 echo "Current folder is 3: "
 echo $PWD
 
-if [ ! $(wp core is-installed --path=${wproot}) ]; then
+if [ ! $(command -v wp &> /dev/null) ]; then
+    echo "COMMAND could not be found"
+    exit
+fi
+
+if [ ! $(wp core is-installed) ]; then
     echo 'Set up database'
     # Setup database
     wp core install \
