@@ -3,7 +3,17 @@
 # terminate on errors
 set -e
 
-echo 'About to change directories'
+echo "Wonsta: Starting to run WP-setup"
+
+while [ ! -e wp-config.php ]; do
+  if [ $pwd/ = / ]; then
+    echo "No WordPress root found" >&2; exit 1
+  fi
+  cd ../
+done
+if [ -e wp-config.php ]; then
+  wproot=$(pwd)
+fi
 
 # Remove lost+found directory
 if [ -d /var/www/wp-content/lost+found ]; then
@@ -22,7 +32,9 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/wp-secrets.php
 fi
 
-if [ ! $(wp core is-installed) ]; then
+echo "Current folder is: "
+echo $PWD
+if [ ! $(wp core is-installed --path=${wproot}) ]; then
     echo 'Set up database'
     # Setup database
     wp core install \
@@ -50,6 +62,7 @@ if [ ! $(wp core is-installed) ]; then
 
     # Setup page builder if is set
     if [ ! $WORDPRESS_BUILDER == "builder" ]; then
+        echo 'Installing page builder'
         wp plugin install \
         $WORDPRESS_BUILDER \
         --activate \
