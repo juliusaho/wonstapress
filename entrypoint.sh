@@ -22,6 +22,9 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/wp-secrets.php
 fi
 
+echo 'changing directory to var/www'
+cd /var/www
+
 if [ ! $(wp core is-installed) ]; then
     echo 'Set up database'
     # Setup database
