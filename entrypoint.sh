@@ -28,8 +28,10 @@ echo "Current folder is 2: "
 echo $PWD
 ls -a
 
+cd /var/www
 echo "Current folder is 3: "
 echo $PWD
+ls -a
 
 if [ ! $(command -v wp &> /dev/null) ]; then
     echo "COMMAND could not be found"
