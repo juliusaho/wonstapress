@@ -46,8 +46,8 @@ COPY config/php.ini /etc/php7/conf.d/zzz_custom.ini
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # wp-content volume
-VOLUME /var/www/wp-content
-WORKDIR /var/www/wp-content
+VOLUME /var/www/
+WORKDIR /var/www/
 RUN chown -R nginx.nginx /var/www
 
 # WordPress (check SHA1 from WordPress)
