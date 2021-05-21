@@ -35,6 +35,11 @@ define( 'DB_PASSWORD', getenv('WORDPRESS_DATABASE_PASSWORD') );
 
 define( 'DB_HOST', getenv('MARIADB_HOST') );
 
+define( 'WP_HOME', getenv('WORDPRESS_URL') );
+
+define( 'WP_SITEURL', getenv('WORDPRESS_URL') );
+
+
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
 }
