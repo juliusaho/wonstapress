@@ -12,7 +12,7 @@ if [ -d /var/www/wp-content/lost+found ]; then
 fi
 
 # Check if volume is empty
-if [ ! "$(ls -A "/var/www" 2>/dev/null)" ]; then
+if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     echo 'Setting up wp-content volume'
     # Copy wp-content from Wordpress src to volume
     cp -a /usr/src/wordpress/. /var/www/
