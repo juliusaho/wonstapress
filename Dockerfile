@@ -51,8 +51,8 @@ WORKDIR /var/www/
 RUN chown -R nginx.nginx /var/www
 
 # WordPress (check SHA1 from WordPress)
-ENV WORDPRESS_VERSION 5.7.1
-ENV WORDPRESS_SHA1 296bc228c4f4d67d7da8814079f86516f6c2337d
+ENV WORDPRESS_VERSION 5.7.2
+ENV WORDPRESS_SHA1 c97c037d942e974eb8524213a505268033aff6c8
 ENV WORDPRESS_DATABASE_NAME localhost
 ENV WORDPRESS_DATABASE_USER localhost
 ENV WORDPRESS_DATABASE_PASSWORD localhost
@@ -64,7 +64,9 @@ ENV WORDPRESS_TITLE WonstaPress
 ENV WORDPRESS_EMAIL email@wonsta.io
 ENV WORDPRESS_PAGES Front
 ENV WORDPRESS_BUILDER builder
-
+ENV WORDPRESS_DEBUG false
+ENV WORDPRESS_DEBUG_LOG false
+ENV WORDPRESS_LANGUAGE en
 RUN mkdir -p /usr/src
 
 # Upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress

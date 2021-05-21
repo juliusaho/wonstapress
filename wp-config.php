@@ -39,6 +39,11 @@ define( 'WP_HOME', getenv('WORDPRESS_URL') );
 
 define( 'WP_SITEURL', getenv('WORDPRESS_URL') );
 
+define( 'WP_DEBUG', getenv('WORDPRESS_DEBUG') );
+
+define( 'WP_DEBUG_LOG', getenv('WORDPRESS_DEBUG_LOG') );
+
+define( 'WP_LANG', getenv('WORDPRESS_LANGUAGE') );
 
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
