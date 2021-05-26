@@ -19,7 +19,7 @@ RUN apk --no-cache add \
   php8-fileinfo \
   php8-sodium \
   php8-gd \
-  imagick \
+  imagemagick \
   php8-simplexml \
   php8-ctype \
   php8-mbstring \
@@ -31,7 +31,10 @@ RUN apk --no-cache add \
   bash \
   less \
   brotli \
-  nginx-mod-http-brotli
+  nginx-mod-http-brotli \
+  fail2ban
+
+
 
 # Configure nginx
 COPY config/global /etc/nginx/global
@@ -88,6 +91,8 @@ COPY wp-secrets.php /usr/src/wordpress
 RUN chown nginx.nginx /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wordpress/wp-secrets.php
 
 RUN mkdir -p /var/entrypoint
+
+
 # Entrypoint to copy wp-content
 COPY entrypoint.sh /var/entrypoint/entrypoint.sh
 ENTRYPOINT [ "/var/entrypoint/entrypoint.sh" ]
