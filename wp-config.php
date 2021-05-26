@@ -39,9 +39,9 @@ define( 'WP_HOME', getenv('WORDPRESS_URL') );
 
 define( 'WP_SITEURL', getenv('WORDPRESS_URL') );
 
-define( 'WP_DEBUG', getenv('WORDPRESS_DEBUG') );
+define( 'WP_DEBUG', boolval(getenv('WORDPRESS_DEBUG')) );
 
-define( 'WP_DEBUG_LOG', getenv('WORDPRESS_DEBUG_LOG') );
+define( 'WP_DEBUG_LOG', boolval(getenv('WORDPRESS_DEBUG_LOG')) );
 
 define( 'WP_LANG', getenv('WORDPRESS_LANGUAGE') );
 
