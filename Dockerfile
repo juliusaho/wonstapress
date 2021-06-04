@@ -95,7 +95,7 @@ RUN mkdir -p /var/entrypoint
 COPY entrypoint.sh /var/entrypoint/entrypoint.sh
 
 # Copy mu-plugins
-COPY mu-plugins /usr/src/wordpress/wp-content
+COPY mu-plugins /usr/src/wordpress/wp-content/mu-plugins
 
 ENTRYPOINT [ "/var/entrypoint/entrypoint.sh" ]
 
