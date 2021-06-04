@@ -143,6 +143,7 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
     register_rest_route( $namespace, '/' . $base . '/schema', array(
       'methods'  => WP_REST_Server::READABLE,
       'callback' => array( $this, 'get_public_item_schema' ),
+      'permission_callback' => array( $this, 'update_plugins_permissions_check' ),
     ) );
     
   }

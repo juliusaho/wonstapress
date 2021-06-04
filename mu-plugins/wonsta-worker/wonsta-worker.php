@@ -26,4 +26,4 @@ function activate_plugin_wonsta_worker() {
     $api->register_routes();
 }
 
-add_action( 'init', 'activate_plugin_wonsta_worker' );
+add_action( 'rest_api_init', 'activate_plugin_wonsta_worker' );
