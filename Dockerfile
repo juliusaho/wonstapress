@@ -93,6 +93,10 @@ RUN chown nginx.nginx /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wo
 RUN mkdir -p /var/entrypoint
 # Entrypoint to copy wp-content
 COPY entrypoint.sh /var/entrypoint/entrypoint.sh
+
+# Copy mu-plugins
+COPY mu-plugins /usr/src/wordpress/wp-content
+
 ENTRYPOINT [ "/var/entrypoint/entrypoint.sh" ]
 
 EXPOSE 80
