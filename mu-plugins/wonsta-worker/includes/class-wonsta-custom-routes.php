@@ -39,12 +39,18 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
 
     // get active status
     $isActive = is_plugin_active($file);
-
+    $api = plugins_api('plugin_information', 
+      array(
+        'slug' => $plugin,
+        'fields' => array(
+          'sections' => false
+        )
+      )
+    );
     if (file_exists($pluginDir)) {
 
-      $skin = new Automatic_Upgrader_Skin();
+      $skin = new Automatic_Upgrader_Skin(array('api' => $api));
       $upgrader = new \Plugin_Upgrader( $skin );
-
       $upgrade = $upgrader->upgrade($file);
 
       if($upgrade){
@@ -77,6 +83,8 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
       $actives = [];
 
       foreach($plugins as $plugin){
+
+        // get path
         $pluginDir = $this->wonsta_get_plugin_dir($plugin);
         $file = sprintf('%s/%s', $plugin, key(get_plugins("/{$plugin}")));
 
@@ -92,9 +100,7 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
       if($pluginFiles){
         $skin = new Automatic_Upgrader_Skin();
         $upgrader = new \Plugin_Upgrader( $skin );
-
         $upgrade = $upgrader->bulk_upgrade($pluginFiles);
-        print_r($upgrade);
         if($upgrade){
           
           foreach($actives as $active){
@@ -104,7 +110,6 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
           return $upgrader->skin->get_upgrade_messages();
 
         }else{
-
           return $upgrader->skin->get_upgrade_messages();
         }
       }
@@ -158,17 +163,20 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
 
     $params = $request->get_params();
     $plugin = $params['plugin'];
-
     if($plugin){
       if ( method_exists( $this, 'wonsta_update_plugin' ) ) {
         $data = $this->wonsta_update_plugin( $plugin );
-        if(is_array($data)){
-          return new WP_REST_Response( $data, 200 );
-        }
+        // TODO: Better responses for plugin update cases
+        return new WP_REST_Response( 
+          array(
+            'status' => '200',
+            'data' => $data
+          )
+        );
       }
     }
     
-    return new WP_Error( 'cant-update', __( 'message', 'text-domain' ), array( 'status' => 500 ) );
+    return new WP_Error( 'cant-update', __( '404 plugin not found', 'wonsta' ), array( 'status' => 200 ) );
 
   }
 
@@ -184,13 +192,16 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
     if($plugins){
       if ( method_exists( $this, 'wonsta_update_plugins' ) ) {
         $data = $this->wonsta_update_plugins( $plugins );
-        if(is_array($data)){
-          return new WP_REST_Response( $data, 200 );
-        }
+        return new WP_REST_Response( 
+          array(
+            'status' => '200',
+            'data' => $data
+          )
+        );
       }
     }
     
-    return new WP_Error( 'cant-update', __( 'message', 'text-domain' ), array( 'status' => 500 ) );
+    return new WP_Error( 'cant-update', __( '404 plugin not found', 'wonsta' ), array( 'status' => 200 ) );
 
   }
 
