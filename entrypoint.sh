@@ -22,6 +22,13 @@ if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
     curl -f https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/wp-secrets.php
 fi
 
+# Check if mu-plugin exists
+if [ ! "$(ls -A "/var/www/wp-content/mu-plugins" 2>/dev/null)" ]; then
+    echo 'Setting up mu-plugins'
+    # Copy wp-content from Wordpress src to volume
+    cp -a /usr/src/wordpress/wp-content/mu-plugins. /var/www/wp-content/mu-plugins
+fi
+
 echo 'changing directory to var/www'
 cd /var/www
 
