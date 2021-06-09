@@ -26,7 +26,7 @@ fi
 if [ ! "$(ls -A "/var/www/wp-content/mu-plugins" 2>/dev/null)" ]; then
     echo 'Setting up mu-plugins'
     # Copy wp-content from Wordpress src to volume
-    cp -a /usr/src/wordpress/wp-content/mu-plugins. /var/www/wp-content/mu-plugins
+    cp -a /usr/src/wordpress/wp-content/mu-plugins/. /var/www/wp-content/mu-plugins
 fi
 
 echo 'changing directory to var/www'
