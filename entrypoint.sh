@@ -5,9 +5,6 @@ set -e
 
 echo 'About to change directories'
 
-# set www-data user
-su -u www-data
-
 # Remove lost+found directory
 if [ -d /var/www/wp-content/lost+found ]; then
     echo 'Removing dir'
