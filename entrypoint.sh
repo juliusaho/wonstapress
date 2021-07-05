@@ -68,10 +68,6 @@ if [ ! $(wp core is-installed) ]; then
         --quiet || true
     fi
 
-    echo 'Update WP'
-    # Update WordPress
-    wp core update
-
     # Update WordPress database
     wp core update-db
 
