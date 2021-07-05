@@ -70,6 +70,8 @@ COPY entrypoint.sh /var/entrypoint/entrypoint.sh
 # Copy mu-plugins
 COPY mu-plugins /usr/src/wordpress/wp-content/mu-plugins
 
+USER www-data
+
 ENTRYPOINT [ "/var/entrypoint/entrypoint.sh" ]
 
 EXPOSE 80
