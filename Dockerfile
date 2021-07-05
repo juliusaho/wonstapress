@@ -4,7 +4,7 @@ LABEL Maintainer="Julius Aho"
 # Install packages
 RUN apt-get update && apt-get upgrade
 RUN apt-get -y install php-fpm php-mysqli php-mysql php-fpm php-cli php-mbstring php-curl php-gd php-intl php-soap php-xml php-xmlrpc php-zip php-json php-opcache php-simplexml php-ctype php-imagick php-xmlreader php-xmlwriter php-dom php-phar 
-RUN apt-get -y install nginx supervisor curl bash less brotli fail2ban redis
+RUN apt-get -y install nginx supervisor curl bash less brotli fail2ban redis sudo
 
 RUN apt-get -y install wget
 RUN apt-get -y install vim
@@ -23,7 +23,7 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # wp-content volume
 VOLUME /var/www/
 WORKDIR /var/www/
-RUN chown -R www-data.www-data /var/www
+RUN sudo chown -R www-data.www-data /var/www
 
 # WordPress (check SHA1 from WordPress)
 ENV WORDPRESS_VERSION 5.7.2
@@ -49,7 +49,7 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
 	&& tar -xzf wordpress.tar.gz -C /usr/src/ \
 	&& rm wordpress.tar.gz \    
-	&& chown -R www-data.www-data /usr/src/wordpress
+	&& sudo chown -R www-data.www-data /usr/src/wordpress
 
 # Add WP CLI
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
@@ -57,11 +57,11 @@ RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh
 
 # WP config
 COPY wp-config.php /usr/src/wordpress
-RUN chown www-data.www-data /usr/src/wordpress/wp-config.php && chmod 640 /usr/src/wordpress/wp-config.php
+RUN sudo chown www-data.www-data /usr/src/wordpress/wp-config.php && chmod 640 /usr/src/wordpress/wp-config.php
 
 # Append WP secrets
 COPY wp-secrets.php /usr/src/wordpress
-RUN chown www-data.www-data /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wordpress/wp-secrets.php
+RUN sudo chown www-data.www-data /usr/src/wordpress/wp-secrets.php && chmod 640 /usr/src/wordpress/wp-secrets.php
 
 RUN mkdir -p /var/entrypoint
 # Entrypoint to copy wp-content
@@ -69,8 +69,6 @@ COPY entrypoint.sh /var/entrypoint/entrypoint.sh
 
 # Copy mu-plugins
 COPY mu-plugins /usr/src/wordpress/wp-content/mu-plugins
-
-USER www-data
 
 ENTRYPOINT [ "/var/entrypoint/entrypoint.sh" ]
 

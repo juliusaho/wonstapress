@@ -5,6 +5,9 @@ set -e
 
 echo 'About to change directories'
 
+# set www-data user
+su -u www-data
+
 # Remove lost+found directory
 if [ -d /var/www/wp-content/lost+found ]; then
     echo 'Removing dir'
@@ -42,11 +45,12 @@ if [ ! $(wp core is-installed) ]; then
         --admin_email=$WORDPRESS_EMAIL \
         --title="$WORDPRESS_TITLE" \
         --skip-plugins \
-        --skip-email
+        --skip-email \
+        --allow-root
 
     echo 'Set up blog description'
     # Setup blog description
-    wp option update blogdescription "$WORDPRESS_DESCRIPTION"
+    wp option update blogdescription "$WORDPRESS_DESCRIPTION" --allow-root
 
     echo 'Set up adminuser on first load'
     # Setup admin user
@@ -55,7 +59,8 @@ if [ ! $(wp core is-installed) ]; then
         --user_pass="$WORDPRESS_PASSWORD" \
         --role=administrator \
         --quiet \
-        --porcelain || true
+        --porcelain \
+        --allow-root || true
 
 
     # Setup page builder if is set
@@ -65,11 +70,12 @@ if [ ! $(wp core is-installed) ]; then
         $WORDPRESS_BUILDER \
         --activate \
         --force \
-        --quiet || true
+        --quiet \
+        --allow-root || true
     fi
 
     # Update WordPress database
-    wp core update-db
+    wp core update-db --allow-root
 
     # Setup correct ownership
     chown -R 100:101 /var/www
