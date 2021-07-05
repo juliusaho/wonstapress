@@ -42,12 +42,11 @@ if [ ! $(wp core is-installed) ]; then
         --admin_email=$WORDPRESS_EMAIL \
         --title="$WORDPRESS_TITLE" \
         --skip-plugins \
-        --skip-email \
-        --allow-root
+        --skip-email
 
     echo 'Set up blog description'
     # Setup blog description
-    wp option update blogdescription "$WORDPRESS_DESCRIPTION" --allow-root
+    wp option update blogdescription "$WORDPRESS_DESCRIPTION"
 
     echo 'Set up adminuser on first load'
     # Setup admin user
@@ -56,8 +55,7 @@ if [ ! $(wp core is-installed) ]; then
         --user_pass="$WORDPRESS_PASSWORD" \
         --role=administrator \
         --quiet \
-        --porcelain \
-        --allow-root || true
+        --porcelain || true
 
 
     # Setup page builder if is set
@@ -67,14 +65,14 @@ if [ ! $(wp core is-installed) ]; then
         $WORDPRESS_BUILDER \
         --activate \
         --force \
-        --quiet \
-        --allow-root || true
+        --quiet || true
     fi
 
-    echo 'Update WP Database'
+    echo 'Update WP'
+
 
     # Update WordPress database
-    wp core update-db --allow-root
+    wp core update-db
 
     # Setup correct ownership
     chown -R 100:101 /var/www
