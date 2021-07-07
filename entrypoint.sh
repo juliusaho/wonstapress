@@ -70,12 +70,12 @@ if [ ! $(wp core is-installed) ]; then
 
     echo 'Update WP'
 
-
     # Update WordPress database
     wp core update-db
 
     # Setup correct ownership
     chown -R 100:101 /var/www
+
 else
     echo 'WordPress core already installed, skipping wp-cli setup'
 fi
