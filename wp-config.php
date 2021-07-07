@@ -49,6 +49,9 @@ define ( 'WP_AUTO_UPDATE_CORE', 'minor');
 
 define( 'DISALLOW_FILE_EDIT', true);
 
+define( 'WP_REDIS_HOST', DB_HOST );
+                      
+define( 'WP_REDIS_PORT', 6379 ); 
 
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
