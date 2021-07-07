@@ -32,7 +32,7 @@ fi
 echo 'changing directory to var/www'
 cd /var/www
 
-if [ ! $(wp core is-installed) ]; then
+if [ ! "$(wp core is-installed)" ]; then
     echo 'Set up database'
     # Setup database
     wp core install \
