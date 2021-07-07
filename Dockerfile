@@ -1,5 +1,5 @@
 FROM alpine:3.13
-LABEL Maintainer="Julius Aho"
+LABEL Maintainer="Julius Aho / Wonsta"
 
 # Install packages
 # Todo: Update to php 8 when WP-CLI support ready
