@@ -45,12 +45,14 @@ define( 'WP_DEBUG_LOG', boolval(getenv('WORDPRESS_DEBUG_LOG')) );
 
 define( 'WP_LANG', getenv('WORDPRESS_LANGUAGE') );
 
-define ( 'WP_AUTO_UPDATE_CORE', 'minor');
+define( 'WP_CACHE', getenv('WORDPRESS_CACHE') );
+
+define( 'WP_AUTO_UPDATE_CORE', 'minor');
 
 define( 'DISALLOW_FILE_EDIT', true);
 
 define( 'WP_REDIS_HOST', DB_HOST );
-                      
+
 define( 'WP_REDIS_PORT', 6379 ); 
 
 if (!defined('ABSPATH')) {
