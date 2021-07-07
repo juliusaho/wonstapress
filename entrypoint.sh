@@ -30,12 +30,10 @@ if [ ! "$(ls -A "/var/www/wp-content/mu-plugins" 2>/dev/null)" ]; then
 fi
 
 echo 'changing directory to var/www'
-
 cd /var/www
 
 if [ ! $(wp core is-installed) ]; then
     echo 'Set up database'
-
     # Setup database
     wp core install \
         --url=$WORDPRESS_URL \
@@ -70,16 +68,14 @@ if [ ! $(wp core is-installed) ]; then
         --quiet || true
     fi
 
-    echo 'Update WP Database'
+    echo 'Update WP'
+
 
     # Update WordPress database
     wp core update-db
 
-    echo 'Change ownership'
-
     # Setup correct ownership
     chown -R 100:101 /var/www
-
 else
     echo 'WordPress core already installed, skipping wp-cli setup'
 fi
