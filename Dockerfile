@@ -27,6 +27,7 @@ RUN apk --no-cache add \
   php7-mbstring \
   php7-zip \
   php7-opcache \
+  php7-pecl-redis \
   nginx \
   supervisor \
   curl \
@@ -34,7 +35,7 @@ RUN apk --no-cache add \
   less \
   brotli \
   nginx-mod-http-brotli \
-  fail2ban
+  fail2ban 
 
 # Configure nginx
 COPY config/global /etc/nginx/global
@@ -69,6 +70,7 @@ ENV WORDPRESS_BUILDER builder
 ENV WORDPRESS_DEBUG false
 ENV WORDPRESS_DEBUG_LOG false
 ENV WORDPRESS_LANGUAGE en
+
 RUN mkdir -p /usr/src
 
 # Upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress

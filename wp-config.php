@@ -45,6 +45,11 @@ define( 'WP_DEBUG_LOG', boolval(getenv('WORDPRESS_DEBUG_LOG')) );
 
 define( 'WP_LANG', getenv('WORDPRESS_LANGUAGE') );
 
+define ( 'WP_AUTO_UPDATE_CORE', 'minor');
+
+define( 'DISALLOW_FILE_EDIT', true);
+
+
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
 }
