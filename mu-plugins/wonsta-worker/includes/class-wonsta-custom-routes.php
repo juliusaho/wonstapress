@@ -221,7 +221,13 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
 
     $this->init();
     $url = get_home_url();
-    $headers = get_headers($url);
+    stream_context_set_default( [
+      'ssl' => [
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+      ],
+  ]);
+    $headers = get_headers($url, 1);
 
     function get_http_response_code($url) {
       $headers = get_headers($url);
