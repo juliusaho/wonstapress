@@ -122,10 +122,11 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
   public function register_routes() {
     $version = '1';
     $namespace = 'wonsta/v' . $version;
-    $base = 'plugins';
+    $plugins_base = 'plugins';
+    $status_base = 'status';
 
     // Endpoint for retrieving single plugin from URL param
-    register_rest_route( $namespace, '/' . $base . '/update/(?P<plugin>[a-zA-Z0-9-/!"#%]+)', array(
+    register_rest_route( $namespace, '/' . $plugins_base . '/update/(?P<plugin>[a-zA-Z0-9-/!"#%]+)', array(
       array(
         'methods'             => "GET",
         'callback'            => array( $this, 'update_plugin' ),
@@ -137,7 +138,7 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
     ) );
 
     // Endpoint for retrieving multiple plugins from body
-    register_rest_route( $namespace, '/' . $base . '/update/', array(
+    register_rest_route( $namespace, '/' . $plugins_base . '/update/', array(
       array(
         'methods'             => "POST",
         'callback'            => array( $this, 'update_plugins' ),
@@ -145,7 +146,15 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
       ),
     ) );
 
-    register_rest_route( $namespace, '/' . $base . '/schema', array(
+      // Endpoint for retrieving multiple plugins from body
+      register_rest_route( $namespace, '/' . $status_base . '/', array(
+        array(
+          'methods'             => "GET",
+          'callback'            => array( $this, 'health_check' )
+        ),
+      ) );
+
+    register_rest_route( $namespace, '/' . $plugins_base . '/schema', array(
       'methods'  => WP_REST_Server::READABLE,
       'callback' => array( $this, 'get_public_item_schema' ),
       'permission_callback' => array( $this, 'update_plugins_permissions_check' ),
@@ -202,6 +211,29 @@ class Wonsta_Custom_Route extends WP_REST_Controller {
     }
     
     return new WP_Error( 'cant-update', __( '404 plugin not found', 'wonsta' ), array( 'status' => 200 ) );
+
+  }
+
+  /*
+  * Return site status
+  */
+  public function health_check(  WP_REST_Request $request ) {
+
+    $this->init();
+    $url = get_home_url();
+    $headers = get_headers($url);
+
+    function get_http_response_code($url) {
+      $headers = get_headers($url);
+      return substr($headers[0], 9, 3);
+    }
+
+    return new WP_REST_Response(
+      array(
+        'status' => get_http_response_code($url),
+        'data' => $headers
+      )
+    );
 
   }
 

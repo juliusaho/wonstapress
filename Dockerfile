@@ -28,6 +28,7 @@ RUN apk --no-cache add \
   php7-zip \
   php7-opcache \
   php7-pecl-redis \
+  php7-bcmath \
   nginx \
   supervisor \
   curl \
